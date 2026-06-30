@@ -87,6 +87,67 @@ Each tab has a header row created automatically:
 
 ---
 
+## Step 7 — Add reCAPTCHA v3 (spam protection)
+
+The forms are wired for **reCAPTCHA v3**, the newest version. It runs invisibly
+in the background, scores each submission 0.0–1.0 (1.0 = very likely human), and
+the Apps Script rejects anything below the threshold. There is **no checkbox or
+puzzle** for your visitors.
+
+### 7a. Get your keys
+
+1. Go to <https://www.google.com/recaptcha/admin/create> (sign in with your
+   Google account).
+2. Fill in:
+   - **Label:** `Elite Spine Website`
+   - **reCAPTCHA type:** choose **reCAPTCHA v3**
+   - **Domains:** add your live domain (e.g. `elitespineparamus.com`). Add
+     `localhost` too if you want to test locally.
+3. Accept the terms and click **Submit**.
+4. You'll get two keys — copy both:
+   - **Site key** (public — goes in `app.js`)
+   - **Secret key** (private — goes in the Apps Script)
+
+### 7b. Add the SITE key to `app.js`
+
+1. Open **`app.js`** and find:
+   ```js
+   const RECAPTCHA_SITE_KEY = '';
+   ```
+2. Paste your **site key** between the quotes and save:
+   ```js
+   const RECAPTCHA_SITE_KEY = '6Lxxxxxxxxxxxxxxxxxxxxxx';
+   ```
+   The reCAPTCHA library now loads automatically and attaches a token to every
+   submission.
+
+### 7c. Add the SECRET key to the Apps Script
+
+1. In the Apps Script editor (`Code.gs`), find:
+   ```js
+   var RECAPTCHA_SECRET = '';
+   ```
+2. Paste your **secret key** between the quotes and save:
+   ```js
+   var RECAPTCHA_SECRET = '6Lxxxxxxxxxxxxxxxxxxxxxx';
+   ```
+3. **Re-deploy a new version** (Deploy → Manage deployments → Edit → Version:
+   New version → Deploy) so the live endpoint runs the updated code.
+
+That's it. Submissions that fail verification are silently rejected and never
+reach the Sheet. To make the filter stricter or looser, change
+`RECAPTCHA_MIN_SCORE` in `Code.gs` (higher = stricter; `0.5` is Google's
+recommended default).
+
+> **Both keys must come from the same reCAPTCHA v3 registration**, and the live
+> domain must be listed in the reCAPTCHA admin console or every token will fail.
+
+> **The "protected by reCAPTCHA" disclosure** already appears under each form's
+> submit button — Google's terms require either their floating badge or this
+> text notice, so please leave it in place.
+
+---
+
 ## How "one tab per form" works
 
 Each `<form>` in the HTML carries an attribute that names its destination tab:

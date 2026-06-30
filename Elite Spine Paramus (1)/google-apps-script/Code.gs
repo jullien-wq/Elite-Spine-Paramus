@@ -23,6 +23,32 @@
 // Or paste a specific spreadsheet ID to target another file.
 var SPREADSHEET_ID = '';
 
+// Paste your reCAPTCHA v3 SECRET key here (NOT the site key).
+// Leave blank to skip verification (forms still record).
+var RECAPTCHA_SECRET = '';
+
+// Submissions scoring below this are treated as bots and rejected.
+// 0.5 is Google's recommended starting threshold.
+var RECAPTCHA_MIN_SCORE = 0.5;
+
+// Verify a reCAPTCHA v3 token with Google. Returns true if the token
+// is valid and scores at or above the threshold (or if no secret is set).
+function verifyRecaptcha(token) {
+  if (!RECAPTCHA_SECRET) return true; // verification disabled
+  if (!token) return false;
+  try {
+    var res = UrlFetchApp.fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'post',
+      payload: { secret: RECAPTCHA_SECRET, response: token },
+      muteHttpExceptions: true
+    });
+    var data = JSON.parse(res.getContentText());
+    return data.success === true && (typeof data.score !== 'number' || data.score >= RECAPTCHA_MIN_SCORE);
+  } catch (err) {
+    return false;
+  }
+}
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   try {
@@ -39,8 +65,17 @@ function doPost(e) {
     // Which tab does this submission belong in?
     var tabName = String(params._tab || 'Submissions').substring(0, 90).trim() || 'Submissions';
     var source  = params._source || '';
+    var token   = params._recaptcha || '';
     delete params._tab;
     delete params._source;
+    delete params._recaptcha;
+
+    // ---- Reject bots: verify the reCAPTCHA token ----
+    if (!verifyRecaptcha(token)) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: false, error: 'recaptcha_failed' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
 
     // ---- Open spreadsheet + get/create the tab ----
     var ss = SPREADSHEET_ID
