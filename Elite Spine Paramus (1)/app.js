@@ -104,20 +104,44 @@
   }
 
   // ==========================================================
-  // FORMS → GOOGLE SHEET
-  // Paste your Apps Script Web App URL between the quotes below.
-  // (See setup instructions / SHEET-SETUP.md). Until it's filled
-  // in, forms still validate and show the success state, but no
-  // data is transmitted.
+  // FORMS → GOOGLE SHEET + reCAPTCHA v3
+  // 1. SHEET_ENDPOINT: your Apps Script Web App URL (set below).
+  // 2. RECAPTCHA_SITE_KEY: paste your reCAPTCHA v3 SITE key.
+  // See SHEET-SETUP.md for the full walkthrough. reCAPTCHA stays
+  // off until a site key is present; forms still work meanwhile.
   // ==========================================================
   const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwvpP6t2vKnA2xpA-hm3JaEg4mzE7Jo9-V6d4DSAUDqXudpjNqrDIaSv1DRlalRhe8xrg/exec';
+  const RECAPTCHA_SITE_KEY = '';
 
-  function sendToSheet(form) {
+  // Load the reCAPTCHA v3 library once, only if a key is configured.
+  if (RECAPTCHA_SITE_KEY) {
+    const s = document.createElement('script');
+    s.src = 'https://www.google.com/recaptcha/api.js?render=' + encodeURIComponent(RECAPTCHA_SITE_KEY);
+    s.async = true;
+    document.head.appendChild(s);
+  }
+
+  // Resolve a fresh reCAPTCHA token for a given action (or '' if disabled).
+  function getRecaptchaToken(action) {
+    if (!RECAPTCHA_SITE_KEY || typeof grecaptcha === 'undefined') {
+      return Promise.resolve('');
+    }
+    return new Promise((resolve) => {
+      grecaptcha.ready(() => {
+        grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action })
+          .then(resolve)
+          .catch(() => resolve(''));
+      });
+    });
+  }
+
+  function sendToSheet(form, token) {
     if (!SHEET_ENDPOINT) return Promise.resolve();
     const data = new URLSearchParams();
     // Tab name comes from the form's data-sheet-tab attribute
     data.append('_tab', form.getAttribute('data-sheet-tab') || 'Submissions');
     data.append('_source', location.pathname.split('/').pop() || 'index.html');
+    if (token) data.append('_recaptcha', token);
     new FormData(form).forEach((value, key) => {
       if (key.charAt(0) !== '_') data.append(key, value);
     });
@@ -191,8 +215,12 @@
         form.reset();
         if (btn) { btn.disabled = false; btn.style.opacity = ''; }
       };
-      // Send to Sheet (fire-and-forget, optimistic UI), then confirm
-      sendToSheet(form).then(reveal).catch(reveal);
+      // Get a reCAPTCHA token (no-op if not configured), then send to Sheet.
+      const action = (form.getAttribute('data-sheet-tab') || 'submit').replace(/\W+/g, '_');
+      getRecaptchaToken(action)
+        .then((token) => sendToSheet(form, token))
+        .then(reveal)
+        .catch(reveal);
     });
   });
 })();
