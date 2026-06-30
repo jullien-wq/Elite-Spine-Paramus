@@ -21,7 +21,9 @@
 
 // Leave blank to use the spreadsheet this script is bound to.
 // Or paste a specific spreadsheet ID to target another file.
-var SPREADSHEET_ID = '';
+// Set explicitly so writes always target the Elite Spine sheet,
+// even if this script was created standalone (not bound to the sheet).
+var SPREADSHEET_ID = '1Ojg-pNH3D0Jc7X8jq3opCFAYacq0wFRETVHZOdQ7emM';
 
 // Paste your reCAPTCHA v3 SECRET key here (NOT the site key).
 // Leave blank to skip verification (forms still record).
