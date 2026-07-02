@@ -5,19 +5,20 @@
 // ============================================================
 (function () {
   var BOOK = "https://www.zocdoc.com/practice/elite-spine-and-sports-care-60454";
-  var SERVICES = "https://www.elitespineparamus.com/services";
+  var SERVICES = "conditions-services.html#services";
 
-  // Therapy → live service page map (for condition "How we treat it" chips)
+  // Therapy → internal services section (fallback href for chips
+  // that have no on-page modal). Nothing links to the old site.
   var THERAPY = {
-    "Physical Therapy": "https://www.elitespineparamus.com/physical-therapy",
-    "Chiropractic Care": "https://www.elitespineparamus.com/chiropractic-care",
-    "Shockwave Therapy": "https://www.elitespineparamus.com/extracorporeal-shockwave-therapy",
-    "Active Release Technique": "https://www.elitespineparamus.com/active-release-technique-art",
-    "Dry Needling": "https://www.elitespineparamus.com/copy-of-pre-post-operation",
-    "Deep Tissue Laser Therapy": "https://www.elitespineparamus.com/deep-tissue-laser-therapy",
-    "Graston Technique": "https://www.elitespineparamus.com/graston-technique",
-    "Massage Therapy": "https://www.elitespineparamus.com/massage-therapy",
-    "Therapeutic Taping": "https://www.elitespineparamus.com/therapeutic-taping"
+    "Physical Therapy": SERVICES,
+    "Chiropractic Care": SERVICES,
+    "Shockwave Therapy": SERVICES,
+    "Active Release Technique": SERVICES,
+    "Dry Needling": SERVICES,
+    "Deep Tissue Laser Therapy": SERVICES,
+    "Graston Technique": SERVICES,
+    "Massage Therapy": SERVICES,
+    "Therapeutic Taping": SERVICES
   };
 
   // ---- CONDITION content ----
@@ -101,6 +102,18 @@
       href: THERAPY["Massage Therapy"],
       lead: "Targeted therapeutic massage eases muscular tension, improves circulation, and supports faster recovery — a powerful complement to your hands-on care and rehab plan.",
       helps: ["Muscle Tension", "Stress", "Circulation", "Recovery"]
+    },
+    "Vein Screening & Procedures": {
+      lead: "Comprehensive vein screening followed by minimally-invasive, in-office procedures to treat varicose and spider veins. We restore healthy circulation, relieve leg heaviness and swelling, and improve both comfort and appearance.",
+      helps: ["Varicose Veins", "Spider Veins", "Leg Swelling", "Poor Circulation"]
+    },
+    "Testosterone Replacement Therapy": {
+      lead: "Physician-guided hormone optimization for men and women with low testosterone. Through carefully monitored, personalized protocols we help restore energy, lean muscle, mental focus, and drive.",
+      helps: ["Low Energy", "Muscle Loss", "Low Libido", "Mental Focus"]
+    },
+    "Peptide Therapy": {
+      lead: "Targeted peptide protocols that support weight loss, recovery, and tissue repair — tailored to your goals and monitored by our team. We provide access to the full range of peptides, including Semaglutide, Tirzepatide, Tesamorelin, GLOW, and BPC-157.",
+      helps: ["Weight Loss", "Recovery", "Tissue Repair", "Anti-Aging"]
     }
   };
 

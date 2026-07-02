@@ -46,15 +46,14 @@
       if (e.key === 'Escape' && mmenu.classList.contains('is-open')) closeMenu();
     });
 
-    // Treatments submenu accordion
-    const tgl = mmenu.querySelector('.mmenu__toggle');
-    if (tgl) {
+    // Submenu accordions (Treatments, About Us, etc.)
+    mmenu.querySelectorAll('.mmenu__toggle').forEach((tgl) => {
       const group = tgl.closest('.mmenu__group');
       tgl.addEventListener('click', () => {
         const open = group.classList.toggle('is-expanded');
         tgl.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
-    }
+    });
   }
 
   // Hero play card — open video lightbox
