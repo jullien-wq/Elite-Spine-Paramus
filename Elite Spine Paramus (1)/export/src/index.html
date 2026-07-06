@@ -40,8 +40,23 @@
 
     <nav class="nav__links" aria-label="Primary">
       <a href="#about">About Us</a>
-      <a href="#treatments" class="has-caret">Treatments <span class="caret">▾</span></a>
-      <a href="#conditions">Conditions We Treat</a>
+      <div class="nav__drop">
+        <a href="conditions-services.html#services" class="has-caret" aria-haspopup="true" aria-expanded="false">Treatments <span class="caret">▾</span></a>
+        <div class="nav__menu" role="menu">
+          <a href="conditions-services.html#services" role="menuitem">Physical Therapy</a>
+          <a href="conditions-services.html#services" role="menuitem">Chiropractic Care</a>
+          <a href="conditions-services.html#services" role="menuitem">Shockwave Therapy</a>
+          <a href="conditions-services.html#services" role="menuitem">Active Release Technique</a>
+          <a href="conditions-services.html#services" role="menuitem">Dry Needling</a>
+          <a href="conditions-services.html#services" role="menuitem">Deep Tissue Laser Therapy</a>
+          <a href="conditions-services.html#services" role="menuitem">Graston Technique</a>
+          <a href="conditions-services.html#services" role="menuitem">Massage Therapy</a>
+          <a href="conditions-services.html#services" class="nav__menu-all" role="menuitem">View All Treatments
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <a href="conditions-services.html">Conditions We Treat</a>
       <a href="#resources">Patient Resources</a>
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
@@ -56,9 +71,69 @@
         </span>
       </a>
       <a class="btn btn--primary nav__book" href="#book">Book Appointment</a>
+      <button class="nav__burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<!-- ============== MOBILE MENU ============== -->
+<div class="mmenu" id="mobileMenu" aria-hidden="true">
+  <div class="mmenu__head">
+    <a class="logo" href="#top" data-mclose aria-label="Elite Spine & Sports Care home">
+      <img class="logo__img" src="images/logo.svg" alt="Elite Spine & Sports Care" />
+    </a>
+    <button class="mmenu__close" type="button" aria-label="Close menu" data-mclose>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <nav class="mmenu__nav" aria-label="Mobile">
+    <a href="#about" data-mclose><span>About Us</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></a>
+    <div class="mmenu__group">
+      <button class="mmenu__toggle" type="button" aria-expanded="false">
+        <span>Treatments</span>
+        <svg class="mmenu__chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="mmenu__sub">
+        <a href="conditions-services.html#services" data-mclose>Physical Therapy</a>
+        <a href="conditions-services.html#services" data-mclose>Chiropractic Care</a>
+        <a href="conditions-services.html#services" data-mclose>Shockwave Therapy</a>
+        <a href="conditions-services.html#services" data-mclose>Active Release Technique</a>
+        <a href="conditions-services.html#services" data-mclose>Dry Needling</a>
+        <a href="conditions-services.html#services" data-mclose>Deep Tissue Laser Therapy</a>
+        <a href="conditions-services.html#services" data-mclose>Graston Technique</a>
+        <a href="conditions-services.html#services" data-mclose>Massage Therapy</a>
+        <a href="conditions-services.html#services" class="mmenu__suball" data-mclose>View All Treatments →</a>
+      </div>
+    </div>
+    <a href="conditions-services.html" data-mclose><span>Conditions We Treat</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></a>
+    <a href="#resources" data-mclose><span>Patient Resources</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></a>
+    <a href="#reviews" data-mclose><span>Reviews</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></a>
+    <a href="#contact" data-mclose><span>Contact</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></a>
+  </nav>
+
+  <div class="mmenu__foot">
+    <a class="btn btn--primary btn--lg btn--block" href="https://www.zocdoc.com/practice/elite-spine-and-sports-care-60454" target="_blank" rel="noopener" data-mclose>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Book Appointment
+    </a>
+    <a class="btn btn--ghost btn--lg btn--block" href="tel:+12014836653" data-mclose>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+      (201) 483-6653
+    </a>
+    <div class="mmenu__meta">
+      <span>37 W Century Rd, Paramus, NJ 07652</span>
+      <span>Mon–Fri 7am–7pm · Sat 8am–1pm</span>
+    </div>
+    <div class="mmenu__social">
+      <a href="https://www.instagram.com/elitespineandsportscare/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+      <a href="https://www.facebook.com/elitespinefortlee/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h3V4h-3c-2 0-4 2-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8Z"/></svg></a>
+      <a href="https://maps.app.goo.gl/ebo8UuCyECZYuDzJ8" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a9 9 0 1 1-3-7"/><path d="M21 4v6h-6"/></svg></a>
+    </div>
+  </div>
+</div>
 
 <main id="top">
 
@@ -84,7 +159,7 @@
     </p>
 
     <div class="hero__ctas">
-      <a class="btn btn--primary btn--lg" href="#book">
+      <a class="btn btn--primary btn--lg" href="https://www.zocdoc.com/practice/elite-spine-and-sports-care-60454" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         Book Appointment
       </a>
@@ -136,13 +211,13 @@
       <p class="lede lede--dark">
         From everyday pain to sports injuries, we treat the root cause so you can get back to living.
       </p>
-      <a class="link link--accent" href="#conditions-all">Explore All Conditions
+      <a class="link link--accent" href="conditions-services.html">Explore All Conditions
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
     </div>
 
     <div class="conditions__grid">
-      <a class="cond" href="#" style="--img:url('https://static.wixstatic.com/media/6515c6_9ad1d01a926b4915acdb2a4569644c77~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
+      <a class="cond" href="conditions-services.html" style="--img:url('https://static.wixstatic.com/media/6515c6_9ad1d01a926b4915acdb2a4569644c77~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
         <div class="cond__bg"></div>
         <div class="cond__glow"></div>
         <div class="cond__label">
@@ -150,7 +225,7 @@
           <span>Neck Pain</span>
         </div>
       </a>
-      <a class="cond" href="#" style="--img:url('https://static.wixstatic.com/media/6515c6_c0cbf6172d6c44a5b150c05226f68e2f~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
+      <a class="cond" href="conditions-services.html" style="--img:url('https://static.wixstatic.com/media/6515c6_c0cbf6172d6c44a5b150c05226f68e2f~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
         <div class="cond__bg"></div>
         <div class="cond__glow"></div>
         <div class="cond__label">
@@ -158,7 +233,7 @@
           <span>Lower Back Pain</span>
         </div>
       </a>
-      <a class="cond" href="#" style="--img:url('https://static.wixstatic.com/media/6515c6_3130fd865f8643589f507757879afb92~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
+      <a class="cond" href="conditions-services.html" style="--img:url('https://static.wixstatic.com/media/6515c6_3130fd865f8643589f507757879afb92~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
         <div class="cond__bg"></div>
         <div class="cond__glow"></div>
         <div class="cond__label">
@@ -166,7 +241,7 @@
           <span>Sciatica</span>
         </div>
       </a>
-      <a class="cond" href="#" style="--img:url('https://static.wixstatic.com/media/6515c6_cae370d706964e3a920ce4aa4c56a684~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
+      <a class="cond" href="conditions-services.html" style="--img:url('https://static.wixstatic.com/media/6515c6_cae370d706964e3a920ce4aa4c56a684~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
         <div class="cond__bg"></div>
         <div class="cond__glow"></div>
         <div class="cond__label">
@@ -174,7 +249,7 @@
           <span>Sports Injuries</span>
         </div>
       </a>
-      <a class="cond" href="#" style="--img:url('https://static.wixstatic.com/media/6515c6_dad99e3cf99f416c935a3e91c4141912~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
+      <a class="cond" href="conditions-services.html" style="--img:url('https://static.wixstatic.com/media/6515c6_dad99e3cf99f416c935a3e91c4141912~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
         <div class="cond__bg"></div>
         <div class="cond__glow"></div>
         <div class="cond__label">
@@ -182,7 +257,7 @@
           <span>Shoulder Pain</span>
         </div>
       </a>
-      <a class="cond" href="#" style="--img:url('https://static.wixstatic.com/media/6515c6_3dab85c382614604ac8b5a8e6f0ef883~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
+      <a class="cond" href="conditions-services.html" style="--img:url('https://static.wixstatic.com/media/6515c6_3dab85c382614604ac8b5a8e6f0ef883~mv2.webp/v1/fill/w_600,h_900,al_c,q_85,enc_avif,quality_auto/cond.webp')">
         <div class="cond__bg"></div>
         <div class="cond__glow"></div>
         <div class="cond__label">
@@ -207,7 +282,7 @@
         We combine expert hands-on therapy, movement science, and advanced technologies to deliver
         faster recovery and long-term results.
       </p>
-      <a class="btn btn--outline" href="#approach">
+      <a class="btn btn--outline" href="conditions-services.html#services">
         Our Treatment Approach
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -217,6 +292,7 @@
       <article class="treat" style="--img:url('images/physical-therapy.avif')">
         <div class="treat__media"></div>
         <div class="treat__shade"></div>
+        <a class="treat__link" href="conditions-services.html#services" aria-label="Physical Therapy"></a>
         <div class="treat__body">
           <h3>Physical Therapy</h3>
           <p>Restore movement and reduce pain.</p>
@@ -226,6 +302,7 @@
       <article class="treat" style="--img:url('images/chiropractic-care.avif')">
         <div class="treat__media"></div>
         <div class="treat__shade"></div>
+        <a class="treat__link" href="conditions-services.html#services" aria-label="Chiropractic Care"></a>
         <div class="treat__body">
           <h3>Chiropractic Care</h3>
           <p>Spinal adjustments for alignment and relief.</p>
@@ -235,6 +312,7 @@
       <article class="treat" style="--img:url('https://static.wixstatic.com/media/6515c6_55bf340195cb486885535a932e451b65~mv2.webp/v1/fill/w_700,h_1120,al_c,q_85,enc_avif,quality_auto/treat.webp')">
         <div class="treat__media"></div>
         <div class="treat__shade"></div>
+        <a class="treat__link" href="conditions-services.html#services" aria-label="Shockwave Therapy"></a>
         <div class="treat__body">
           <h3>Shockwave Therapy</h3>
           <p>Break down pain and accelerate healing.</p>
@@ -244,6 +322,7 @@
       <article class="treat" style="--img:url('https://static.wixstatic.com/media/6515c6_7c2af55988694654904e9ceab6a0953a~mv2.jpg/v1/fill/w_700,h_1120,al_c,q_85,enc_avif,quality_auto/treat.jpg')">
         <div class="treat__media"></div>
         <div class="treat__shade"></div>
+        <a class="treat__link" href="conditions-services.html#services" aria-label="Dry Needling"></a>
         <div class="treat__body">
           <h3>Dry Needling</h3>
           <p>Release muscle tension and trigger points.</p>
@@ -253,6 +332,7 @@
       <article class="treat" style="--img:url('https://static.wixstatic.com/media/6515c6_18a48dd7ae8748d8a6114a78886ba9b6~mv2.webp/v1/fill/w_700,h_1120,al_c,q_85,enc_avif,quality_auto/treat.webp')">
         <div class="treat__media"></div>
         <div class="treat__shade"></div>
+        <a class="treat__link" href="conditions-services.html#services" aria-label="Active Release Technique"></a>
         <div class="treat__body">
           <h3>Active Release<br/>Technique</h3>
           <p>Improve mobility and soft tissue function.</p>
@@ -287,7 +367,7 @@
         <strong>5.0</strong>
         <span>(275+ Google Reviews)</span>
       </div>
-      <a class="btn btn--outline-light" href="#stories">
+      <a class="btn btn--outline-light" href="https://www.zocdoc.com/practice/elite-spine-and-sports-care-60454" target="_blank" rel="noopener">
         Read Patient Stories
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -372,7 +452,7 @@
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 6 6L20 6"/></svg>
         </span>Convenient Paramus location &amp; easy scheduling</li>
       </ul>
-      <a class="btn btn--outline" href="#team">
+      <a class="btn btn--outline" href="https://www.elitespineparamus.com/our-team">
         Meet Our Team
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -408,24 +488,11 @@
           <span>Mon–Fri 7:00am – 7:00pm<br/>Sat 8:00am – 1:00pm</span>
         </li>
       </ul>
-      <a class="link link--accent" href="#directions">Get Directions
+      <a class="link link--accent" href="https://www.google.com/maps/dir/?api=1&destination=37+W+Century+Rd+Paramus+NJ+07652" target="_blank" rel="noopener">Get Directions
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
-      <div class="locale__map" aria-hidden="true">
-        <svg viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice">
-          <rect width="240" height="220" fill="#eef2f6"/>
-          <path d="M0 60 240 80 240 120 0 100Z" fill="#e2eaf2"/>
-          <path d="M0 140 240 130 240 220 0 220Z" fill="#cfe3f3"/>
-          <g stroke="#bfd0df" stroke-width="2" fill="none">
-            <path d="M0 40 240 60"/>
-            <path d="M-10 100 250 110"/>
-            <path d="M0 170 240 180"/>
-            <path d="M40 0 80 220"/>
-            <path d="M150 0 170 220"/>
-          </g>
-          <path d="M120 70c-22 0-30 24-30 36 0 26 30 50 30 50s30-24 30-50c0-12-8-36-30-36Z" fill="#ff6b1a"/>
-          <circle cx="120" cy="104" r="10" fill="#0a1424"/>
-        </svg>
+      <div class="locale__map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3014.281776083074!2d-74.0764221239633!3d40.931491271361445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2fafc49c25417%3A0xcf83c064444c0122!2sChester%20Building%2C%2037%20W%20Century%20Rd%2C%20Paramus%2C%20NJ%2007652!5e0!3m2!1sen!2sus!4v1782847983559!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Map to Elite Spine & Sports Care, 37 W Century Rd, Paramus, NJ"></iframe>
       </div>
     </aside>
   </div>
@@ -520,7 +587,7 @@
     <h2 class="finalcta__title">Your Path to Feeling Better<br/>Starts Here.</h2>
     <p class="finalcta__sub">Book your appointment today and take the first step toward a stronger, pain-free you.</p>
     <div class="finalcta__ctas">
-      <a class="btn btn--primary btn--lg" href="#book">
+      <a class="btn btn--primary btn--lg" href="https://www.zocdoc.com/practice/elite-spine-and-sports-care-60454" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         Book Appointment
       </a>
@@ -534,6 +601,91 @@
 
 </main>
 
+<!-- ============== CONTACT FORM ============== -->
+<section class="cform" id="request">
+  <div class="cform__inner">
+    <div class="cform__intro">
+      <span class="eyebrow eyebrow--accent">Request an Appointment</span>
+      <h2 class="h2">Let's get you moving again.</h2>
+      <p class="lede">Send us a few details and our Paramus team will reach out within one business day to confirm your visit. No referral needed to get started.</p>
+      <ul class="cform__assure">
+        <li>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          37 W Century Rd, Paramus, NJ 07652
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+          (201) 483-6653
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Mon–Fri 7am–7pm · Sat 8am–1pm
+        </li>
+      </ul>
+    </div>
+
+    <form class="cform__form" id="appointmentForm" data-sheet-tab="Appointment Requests" novalidate>
+      <div class="cform__row">
+        <div class="field">
+          <label for="cf-name">Full Name</label>
+          <input type="text" id="cf-name" name="name" autocomplete="name" required placeholder="Jordan Rivera" />
+          <span class="field__err" data-err></span>
+        </div>
+      </div>
+      <div class="cform__row cform__row--2">
+        <div class="field">
+          <label for="cf-phone">Phone</label>
+          <input type="tel" id="cf-phone" name="phone" autocomplete="tel" required placeholder="(201) 555-0199" />
+          <span class="field__err" data-err></span>
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" autocomplete="email" required placeholder="you@email.com" />
+          <span class="field__err" data-err></span>
+        </div>
+      </div>
+      <div class="cform__row">
+        <div class="field">
+          <label for="cf-service">What can we help with?</label>
+          <div class="field__select">
+            <select id="cf-service" name="service" required>
+              <option value="" disabled selected>Select a service or condition</option>
+              <option>Physical Therapy</option>
+              <option>Chiropractic Care</option>
+              <option>Sports Injury Rehab</option>
+              <option>Back or Neck Pain</option>
+              <option>Sciatica</option>
+              <option>Shockwave / Laser Therapy</option>
+              <option>Not sure — help me decide</option>
+            </select>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <span class="field__err" data-err></span>
+        </div>
+      </div>
+      <div class="cform__row">
+        <div class="field">
+          <label for="cf-msg">Anything else? <span class="field__opt">(optional)</span></label>
+          <textarea id="cf-msg" name="message" rows="3" placeholder="Tell us about your symptoms, schedule, or insurance."></textarea>
+        </div>
+      </div>
+      <button class="btn btn--primary btn--lg btn--block" type="submit">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg>
+        Send Request
+      </button>
+      <p class="cform__fineprint">By submitting, you agree to be contacted about your appointment. We never share your information. This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a> apply.</p>
+
+      <div class="cform__success" hidden>
+        <span class="cform__successicon">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>
+        </span>
+        <h3>Request received!</h3>
+        <p>Thanks — our Paramus team will reach out within one business day. Need care sooner? Call <a href="tel:+12014836653">(201) 483-6653</a>.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
 <!-- ============== FOOTER ============== -->
 <footer class="footer">
   <div class="footer__inner">
@@ -543,37 +695,37 @@
       </a>
       <p>Physical therapy and chiropractic care in Paramus, NJ. Helping patients move better, feel better, and live stronger.</p>
       <div class="footer__social">
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h3V4h-3c-2 0-4 2-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8Z"/></svg></a>
-        <a href="#" aria-label="Google"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a9 9 0 1 1-3-7"/><path d="M21 4v6h-6"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor"/></svg></a>
+        <a href="https://www.instagram.com/elitespineandsportscare/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/elitespinefortlee/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 8h3V4h-3c-2 0-4 2-4 4v2H7v4h3v8h4v-8h3l1-4h-4V8Z"/></svg></a>
+        <a href="https://maps.app.goo.gl/ebo8UuCyECZYuDzJ8" target="_blank" rel="noopener" aria-label="Google"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a9 9 0 1 1-3-7"/><path d="M21 4v6h-6"/></svg></a>
+        <a href="https://www.zocdoc.com/practice/elite-spine-and-sports-care-60454" target="_blank" rel="noopener" aria-label="Book on Zocdoc"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></a>
       </div>
     </div>
 
     <div class="footer__col">
       <h4>Our Services</h4>
       <ul>
-        <li><a href="#">Physical Therapy</a></li>
-        <li><a href="#">Chiropractic Care</a></li>
-        <li><a href="#">Sports Injury Rehab</a></li>
-        <li><a href="#">Shockwave Therapy</a></li>
-        <li><a href="#">Dry Needling</a></li>
-        <li><a href="#">Active Release Technique</a></li>
-        <li><a href="#">See All Treatments</a></li>
+        <li><a href="conditions-services.html#services">Physical Therapy</a></li>
+        <li><a href="conditions-services.html#services">Chiropractic Care</a></li>
+        <li><a href="conditions-services.html#services">Sports Injury Rehab</a></li>
+        <li><a href="conditions-services.html#services">Shockwave Therapy</a></li>
+        <li><a href="conditions-services.html#services">Dry Needling</a></li>
+        <li><a href="conditions-services.html#services">Active Release Technique</a></li>
+        <li><a href="conditions-services.html#services">See All Treatments</a></li>
       </ul>
     </div>
 
     <div class="footer__col">
       <h4>Conditions We Treat</h4>
       <ul>
-        <li><a href="#">Back Pain</a></li>
-        <li><a href="#">Neck Pain</a></li>
-        <li><a href="#">Sciatica</a></li>
-        <li><a href="#">Herniated Disc</a></li>
-        <li><a href="#">Shoulder Pain</a></li>
-        <li><a href="#">Knee Pain</a></li>
-        <li><a href="#">Sports Injuries</a></li>
-        <li><a href="#">View All Conditions</a></li>
+        <li><a href="conditions-services.html#conditions">Back Pain</a></li>
+        <li><a href="conditions-services.html#conditions">Neck Pain</a></li>
+        <li><a href="conditions-services.html#conditions">Sciatica</a></li>
+        <li><a href="conditions-services.html#conditions">Herniated Disc</a></li>
+        <li><a href="conditions-services.html#conditions">Shoulder Pain</a></li>
+        <li><a href="conditions-services.html#conditions">Knee Pain</a></li>
+        <li><a href="conditions-services.html#conditions">Sports Injuries</a></li>
+        <li><a href="conditions-services.html#conditions">View All Conditions</a></li>
       </ul>
     </div>
 
@@ -581,11 +733,11 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="#about">About Us</a></li>
-        <li><a href="#team">Our Team</a></li>
+        <li><a href="https://www.elitespineparamus.com/our-team" target="_blank" rel="noopener">Our Team</a></li>
         <li><a href="#resources">Patient Resources</a></li>
-        <li><a href="#">Insurance</a></li>
+        <li><a href="https://www.elitespineparamus.com/insurance" target="_blank" rel="noopener">Insurance</a></li>
         <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#">Blog</a></li>
+        <li><a href="https://www.elitespineparamus.com/blog" target="_blank" rel="noopener">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -599,7 +751,7 @@
           <tr><th>Sunday</th><td>Closed</td></tr>
         </tbody>
       </table>
-      <a class="btn btn--primary btn--block" href="#book">
+      <a class="btn btn--primary btn--block" href="https://www.zocdoc.com/practice/elite-spine-and-sports-care-60454" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         Book Appointment
       </a>
@@ -610,10 +762,10 @@
     <div class="footer__legalinner">
       <span>© 2026 Elite Spine &amp; Sports Care. All rights reserved.</span>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Accessibility</a></li>
-        <li><a href="#">HIPAA Notice</a></li>
+        <li><a href="https://www.elitespineparamus.com/insurance">Insurance</a></li>
+        <li><a href="https://www.elitespineparamus.com/contact-us-1">Contact</a></li>
+        <li><a href="https://swipesimple.com/links/lnk_69bf470e0ef3f5c1e590c6c763e049e2" target="_blank" rel="noopener">Pay Online</a></li>
+        <li><a href="https://www.elitespineparamus.com/about-us">About</a></li>
       </ul>
     </div>
   </div>
