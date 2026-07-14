@@ -31,6 +31,10 @@ var RECAPTCHA_SECRET = '';
 // 0.5 is Google's recommended starting threshold.
 var RECAPTCHA_MIN_SCORE = 0.5;
 
+// Email address that gets an alert on every new submission.
+// Leave blank to disable email notifications.
+var NOTIFY_EMAIL = 'elitespineparamus@gmail.com';
+
 // Verify a reCAPTCHA v3 token with Google. Returns true if the token
 // is valid and scores at or above the threshold (or if no secret is set).
 function verifyRecaptcha(token) {
@@ -108,6 +112,28 @@ function doPost(e) {
       return params[h] !== undefined ? params[h] : '';
     });
     sheet.appendRow(row);
+
+    // ---- Email the owner on every new submission ----
+    if (NOTIFY_EMAIL) {
+      try {
+        var lines = headers.map(function (h, i) {
+          var v = row[i];
+          if (h === 'Timestamp' && v instanceof Date) v = v.toLocaleString();
+          return h + ': ' + v;
+        });
+        var who = params.name ? (' from ' + params.name) : '';
+        MailApp.sendEmail({
+          to: NOTIFY_EMAIL,
+          subject: 'New website lead' + who + ' — ' + tabName,
+          replyTo: params.email || NOTIFY_EMAIL,
+          body: 'A new request came in through the website:\n\n' +
+                lines.join('\n') +
+                '\n\n— Elite Spine website'
+        });
+      } catch (mailErr) {
+        // Don't fail the submission if the email can't send.
+      }
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
