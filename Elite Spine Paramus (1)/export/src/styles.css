@@ -873,12 +873,12 @@ body.menu-open { overflow: hidden; }
   background-size: cover;
   background-position: center;
   transition: transform .8s cubic-bezier(.2,.6,.2,1), filter .5s ease;
-  filter: saturate(.7) brightness(.7) contrast(1.1);
+  filter: var(--cond-filter, saturate(.7) brightness(.7) contrast(1.1));
 }
 .cond::before {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(6,16,31,.1) 0%, rgba(6,16,31,.15) 50%, rgba(6,16,31,.92) 100%);
+  background: linear-gradient(180deg, rgba(6,16,31,.1) 0%, rgba(6,16,31,.15) 50%, rgba(6,16,31, var(--cond-overlay, .92)) 100%);
   z-index: 1;
 }
 .cond__glow {
@@ -915,7 +915,7 @@ body.menu-open { overflow: hidden; }
   border: 1px solid rgba(255,255,255,.2);
   color: var(--accent);
 }
-.cond:hover .cond__bg { transform: scale(1.06); filter: saturate(1) brightness(.85) contrast(1.05); }
+.cond:hover .cond__bg { transform: scale(1.06); filter: var(--cond-filter-hover, saturate(1) brightness(.85) contrast(1.05)); }
 .cond:hover .cond__glow { opacity: 1; }
 .cond:hover .cond__label { border-color: rgba(255,106,26,.5); background: rgba(8,18,33,.92); }
 
@@ -1042,6 +1042,12 @@ body.menu-open { overflow: hidden; }
   font-size: 14px;
 }
 .proof__stars { display: inline-flex; gap: 2px; color: #ffb330; }
+.proof__stars--partial { position: relative; color: rgba(255,179,48,.28); }
+.proof__stars--partial .proof__stars-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  display: inline-flex; gap: 2px; overflow: hidden; white-space: nowrap;
+  color: #ffb330; width: var(--star-fill, 100%);
+}
 .proof__rating strong { color: var(--ink-0); font-size: 16px; }
 .proof__rating span { color: var(--ink-2); font-size: 13px; }
 
@@ -1499,6 +1505,9 @@ body.menu-open { overflow: hidden; }
 }
 .footer__legalinner ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
 .footer__legalinner a:hover { color: var(--accent); }
+.footer__credit { color: var(--ink-3); }
+.footer__credit a { color: var(--ink-2); font-weight: 600; }
+.footer__credit a:hover { color: var(--accent); }
 
 /* ============================================================
    Responsive

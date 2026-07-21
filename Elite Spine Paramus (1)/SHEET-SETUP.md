@@ -148,6 +148,54 @@ recommended default).
 
 ---
 
+## Step 8 — Show your live Google rating (auto-updating stars)
+
+The homepage reviews section can display your **real** Google star rating and
+review count, refreshed automatically. It calls the same Apps Script, which
+fetches the number from Google's Places API and caches it.
+
+### 8a. Enable the Places API + get an API key
+
+1. Go to <https://console.cloud.google.com/> and create (or pick) a project.
+2. **APIs & Services → Library →** search **"Places API"** → **Enable**.
+3. **APIs & Services → Credentials → Create credentials → API key.** Copy it.
+4. (Recommended) Click the key → **Restrict key** → under *API restrictions*
+   choose **Places API** so the key can't be abused elsewhere.
+
+### 8b. Find your Place ID
+
+1. Go to the **Place ID Finder**:
+   <https://developers.google.com/maps/documentation/places/web-service/place-id>
+2. Search **"Elite Spine & Sports Care, Paramus"** on the map.
+3. Copy the **Place ID** it shows (a string like `ChIJ....`).
+
+### 8c. Add both to the Apps Script
+
+1. In `Code.gs`, find and fill in:
+   ```js
+   var PLACES_API_KEY = 'YOUR_API_KEY';
+   var PLACE_ID       = 'YOUR_PLACE_ID';
+   ```
+2. **Re-deploy a new version** (Deploy → Manage deployments → Edit → New
+   version → Deploy).
+3. Test it: open `YOUR_WEB_APP_URL?reviews=1` in a browser — you should see
+   `{"ok":true,"rating":5,"total":...}`.
+
+That's it. The site reads that on page load and renders the exact star fill and
+count. It's cached for 6 hours (`REVIEWS_CACHE_HOURS`) so you stay far within
+Google's free quota. If the key/Place ID aren't set, the site keeps the static
+"5.0 · Google Reviews" fallback — nothing breaks.
+
+> **Cost:** Google gives a large monthly free credit; a Place Details call for
+> just `rating,user_ratings_total` is inexpensive, and the 6-hour cache means
+> only a handful of calls per day regardless of traffic.
+
+> **Note:** Google's API only exposes the overall rating + total count (and up
+> to 5 individual review texts). The three written testimonials on the page stay
+> curated by you; only the star rating and count auto-update.
+
+---
+
 ## How "one tab per form" works
 
 Each `<form>` in the HTML carries an attribute that names its destination tab:
