@@ -46,15 +46,14 @@
       if (e.key === 'Escape' && mmenu.classList.contains('is-open')) closeMenu();
     });
 
-    // Treatments submenu accordion
-    const tgl = mmenu.querySelector('.mmenu__toggle');
-    if (tgl) {
+    // Submenu accordions (Treatments, About Us, etc.)
+    mmenu.querySelectorAll('.mmenu__toggle').forEach((tgl) => {
       const group = tgl.closest('.mmenu__group');
       tgl.addEventListener('click', () => {
         const open = group.classList.toggle('is-expanded');
         tgl.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
-    }
+    });
   }
 
   // Hero play card — open video lightbox
@@ -223,4 +222,38 @@
         .catch(reveal);
     });
   });
+
+  // Live Google rating (fetched from the Apps Script Places endpoint)
+  var gr = document.getElementById('googleRating');
+  if (gr) {
+    var endpoint = gr.getAttribute('data-review-endpoint');
+    if (endpoint) {
+      fetch(endpoint + '?reviews=1')
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d || !d.ok || !d.rating) return;
+          var rating = Math.round(d.rating * 10) / 10;
+          var ratingEl = gr.querySelector('[data-rating]');
+          var totalEl = gr.querySelector('[data-total]');
+          var starsEl = gr.querySelector('[data-stars]');
+          if (ratingEl) ratingEl.textContent = rating.toFixed(1);
+          if (totalEl && d.total) totalEl.textContent = '(' + d.total.toLocaleString() + ' Google Reviews)';
+          if (starsEl) {
+            starsEl.setAttribute('aria-label', rating + ' out of 5 stars');
+            var pct = Math.max(0, Math.min(100, (rating / 5) * 100));
+            // Build a clipped gold overlay of the same 5 stars for precise partial fill
+            if (!starsEl.querySelector('.proof__stars-fill')) {
+              var fill = document.createElement('span');
+              fill.className = 'proof__stars-fill';
+              fill.setAttribute('aria-hidden', 'true');
+              fill.innerHTML = starsEl.innerHTML;
+              starsEl.appendChild(fill);
+            }
+            starsEl.style.setProperty('--star-fill', pct + '%');
+            starsEl.classList.add('proof__stars--partial');
+          }
+        })
+        .catch(function () { /* keep static fallback */ });
+    }
+  }
 })();
