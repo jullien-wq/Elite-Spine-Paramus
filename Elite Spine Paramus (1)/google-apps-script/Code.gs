@@ -148,8 +148,61 @@ function doPost(e) {
   }
 }
 
-// Optional: lets you open the Web App URL in a browser to confirm it's live.
-function doGet() {
+// ===================================================================
+// GOOGLE REVIEWS  (live rating + count, cached)
+// -------------------------------------------------------------------
+// 1. Create an API key in Google Cloud Console with the
+//    "Places API" enabled, and paste it below.
+// 2. Find your Place ID at:
+//    https://developers.google.com/maps/documentation/places/web-service/place-id
+//    (search "Elite Spine & Sports Care Paramus"), paste it below.
+// 3. Re-deploy the web app (Manage deployments -> Edit -> New version).
+// The site calls this endpoint with ?reviews=1 and renders the stars.
+// Results are cached 6 hours so you stay well within the free quota.
+// ===================================================================
+var PLACES_API_KEY = '';
+var PLACE_ID       = '';
+var REVIEWS_CACHE_HOURS = 6;
+
+function getGoogleReviews() {
+  var cache = CacheService.getScriptCache();
+  var cached = cache.get('google_reviews');
+  if (cached) return JSON.parse(cached);
+
+  if (!PLACES_API_KEY || !PLACE_ID) {
+    return { ok: false, error: 'not_configured' };
+  }
+
+  var url = 'https://maps.googleapis.com/maps/api/place/details/json'
+    + '?place_id=' + encodeURIComponent(PLACE_ID)
+    + '&fields=rating,user_ratings_total'
+    + '&key=' + encodeURIComponent(PLACES_API_KEY);
+
+  var res = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+  var data = JSON.parse(res.getContentText());
+
+  var out;
+  if (data.status === 'OK' && data.result) {
+    out = {
+      ok: true,
+      rating: data.result.rating || null,
+      total: data.result.user_ratings_total || 0
+    };
+    // Cache only successful responses.
+    cache.put('google_reviews', JSON.stringify(out), REVIEWS_CACHE_HOURS * 3600);
+  } else {
+    out = { ok: false, error: data.status || 'unknown', detail: data.error_message || '' };
+  }
+  return out;
+}
+
+// GET handler: ?reviews=1 returns the rating JSON; otherwise a health check.
+function doGet(e) {
+  if (e && e.parameter && e.parameter.reviews) {
+    return ContentService
+      .createTextOutput(JSON.stringify(getGoogleReviews()))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return ContentService
     .createTextOutput('Elite Spine form endpoint is running.')
     .setMimeType(ContentService.MimeType.TEXT);

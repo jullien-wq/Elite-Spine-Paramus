@@ -90,7 +90,7 @@ button { font: inherit; }
   position: absolute;
   left: 4%;
   right: 6%;
-  bottom: 4px;
+  bottom: -2px;
   height: 8px;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 C 40 2, 80 12, 120 6 S 180 4, 198 8' stroke='%23ff6a1a' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>") center/100% 100% no-repeat;
 }
@@ -1042,6 +1042,12 @@ body.menu-open { overflow: hidden; }
   font-size: 14px;
 }
 .proof__stars { display: inline-flex; gap: 2px; color: #ffb330; }
+.proof__stars--partial { position: relative; color: rgba(255,179,48,.28); }
+.proof__stars--partial .proof__stars-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  display: inline-flex; gap: 2px; overflow: hidden; white-space: nowrap;
+  color: #ffb330; width: var(--star-fill, 100%);
+}
 .proof__rating strong { color: var(--ink-0); font-size: 16px; }
 .proof__rating span { color: var(--ink-2); font-size: 13px; }
 
@@ -1499,6 +1505,9 @@ body.menu-open { overflow: hidden; }
 }
 .footer__legalinner ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
 .footer__legalinner a:hover { color: var(--accent); }
+.footer__credit { color: var(--ink-3); }
+.footer__credit a { color: var(--ink-2); font-weight: 600; }
+.footer__credit a:hover { color: var(--accent); }
 
 /* ============================================================
    Responsive
