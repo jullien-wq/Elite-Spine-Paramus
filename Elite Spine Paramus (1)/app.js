@@ -206,20 +206,18 @@
       if (!ok) { if (firstBad) firstBad.focus(); return; }
 
       const btn = form.querySelector('button[type="submit"]');
-      const success = form.querySelector('.cform__success');
       if (btn) { btn.disabled = true; btn.style.opacity = '.7'; }
 
-      const reveal = () => {
-        if (success) success.hidden = false;
+      const done = () => {
         form.reset();
-        if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+        window.location.href = '/thank-you';
       };
       // Get a reCAPTCHA token (no-op if not configured), then send to Sheet.
       const action = (form.getAttribute('data-sheet-tab') || 'submit').replace(/\W+/g, '_');
       getRecaptchaToken(action)
         .then((token) => sendToSheet(form, token))
-        .then(reveal)
-        .catch(reveal);
+        .then(done)
+        .catch(done);
     });
   });
 
