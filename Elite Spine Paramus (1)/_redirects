@@ -7,7 +7,7 @@
 # ============================================================
 
 # Home / thank-you
-/thankyou                             /                          301
+/thankyou                             /thank-you                 301
 
 # Services & individual treatment pages
 /services                             /conditions-services#services   301

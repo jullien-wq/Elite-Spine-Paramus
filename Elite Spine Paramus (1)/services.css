@@ -90,6 +90,11 @@
   border-color: rgba(255,106,26,.35);
 }
 .ccard:hover::before { transform: scaleY(1); }
+.ccard:target {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,106,26,.22), 0 26px 50px -28px rgba(10,22,40,.4);
+}
+.ccard:target::before { transform: scaleY(1); }
 .ccard__icon {
   width: 48px; height: 48px;
   border-radius: 12px;
