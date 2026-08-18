@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< Updated upstream
+=======
+<!-- ===== Google Ads conversion tracking - Elite Spine Paramus ===== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11509815924"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  /* 1. Base Google Ads tag */
+  gtag('config', 'AW-11509815924');
+
+  /* 2. Call tracking - swaps displayed number for ad visitors
+        Conversion action: "Web Calls 042225" */
+  gtag('config', 'AW-11509815924/CoAGCNmJobwaEPS0p_Aq', {
+    'phone_conversion_number': '+1 (201) 483-6653'
+  });
+
+  /* 3. Book Appointment - fires on outbound click to Zocdoc
+        Conversion action: "Book Appointment" */
+  document.addEventListener('click', function (e) {
+    var link = e.target && e.target.closest && e.target.closest('a[href*="zocdoc.com"]');
+    if (!link) return;
+    gtag('event', 'conversion', {
+      'send_to': 'AW-11509815924/2o8SCIbRpPsZEPS0p_Aq'
+    });
+  }, true);
+
+  /* 4. Contact form - fires on submit of #appointmentForm
+        Conversion action: "Submit Form 042225" */
+  document.addEventListener('submit', function (e) {
+    if (!e.target || e.target.id !== 'appointmentForm') return;
+    gtag('event', 'conversion', {
+      'send_to': 'AW-11509815924/Q4LeCODnnbwaEPS0p_Aq'
+    });
+  }, true);
+</script>
+<!-- ===== End Google Ads conversion tracking ===== -->
+
+>>>>>>> Stashed changes
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
